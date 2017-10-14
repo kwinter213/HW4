@@ -1,6 +1,6 @@
 # CompArch HW b0100: Register File #
 
-**Due:** Monday, October 16
+**Due:** ~~Monday, October 16~~ Thursday, October 19
 
 This homework is intended to introduce behavioral Verilog and practice test bench design. You will create your first memory, a register file, which will be reused in your CPU design.
 
