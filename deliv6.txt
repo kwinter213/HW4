@@ -1,0 +1,5 @@
+How does the mux32to1by32 module work?
+	The basic function of the mux is to "switch" between inputs to the final output. The address bits determine which input is being selected for output. The assignments in lines 9-41 assign the inputs to the wires. The line "assign out = mux[address];" connects the wire at the address given by address to the output.
+	
+How does the decoder1to32 module work?
+	The decoder's function is to select one of 32 registers from a single 4 bit address. It only works when enable== 1. When enable ==1, it is shifted over to the bit of the address. For example, if enable==1, and address==3, out becomes 1000, indicating the choice of the 4th register. If enable ==0, then the output will be 0, meaning that it has selected none of the registers.

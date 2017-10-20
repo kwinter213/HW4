@@ -5,6 +5,8 @@
 //   2 asynchronous read ports
 //   1 synchronous, positive edge triggered write port
 //------------------------------------------------------------------------------
+`include "register32zero.v"
+`include "mux32to1by32.v"
 
 module regfile
 (
@@ -18,10 +20,19 @@ input		RegWrite,	// Enable writing of register when High
 input		Clk		// Clock (Positive Edge Triggered)
 );
 
-  // These two lines are clearly wrong.  They are included to showcase how the 
-  // test harness works. Delete them after you understand the testing process, 
-  // and replace them with your actual code.
-  assign ReadData1 = 42;
-  assign ReadData2 = 42;
+  wire [31:0] decodeout; //output of decoder
+  wire [31:0] q[31:0]; //output of registers
 
+  //Decoder (included in mux32to1by32.v file)
+  decoder1to32 decoder(decodeout[31:0], RegWrite, WriteRegister[4:0]); //inputs and outputs defined by diagram
+
+  //write data/decoder into 32 bit registers
+  register32zero regzero(q[0][31:0],q[1][31:0],q[2][31:0],q[3][31:0],q[4][31:0],q[5][31:0],q[6][31:0],q[7][31:0],q[8][31:0],q[9][31:0],q[10][31:0],q[11][31:0],q[12][31:0],q[13][31:0],q[14][31:0],q[15][31:0],q[16][31:0],q[17][31:0],q[18][31:0],q[19][31:0],q[20][31:0],q[21][31:0],q[22][31:0],q[23][31:0],q[24][31:0],q[25][31:0],q[26][31:0],q[27][31:0],q[28][31:0],q[29][31:0],q[30][31:0],q[31][31:0],WriteData[31:0],decodeout[31:0],clk); //decode out determines which register to pick, write data writes data, q is the output of the selected mux
+
+  //MUX array
+  mux32to1by32 mux320(ReadData1,ReadRegister1,q[0][31:0],q[1][31:0],q[2][31:0],q[3][31:0],q[4][31:0],q[5][31:0],q[6][31:0],q[7][31:0],q[8][31:0],q[9][31:0],q[10][31:0],q[11][31:0],q[12][31:0],q[13][31:0],q[14][31:0],q[15][31:0],q[16][31:0],q[17][31:0],q[18][31:0],q[19][31:0],q[20][31:0],q[21][31:0],q[22][31:0],q[23][31:0],q[24][31:0],q[25][31:0],q[26][31:0],q[27][31:0],q[28][31:0],q[29][31:0],q[30][31:0],q[31][31:0]);
+  mux32to1by32 mux321(ReadData2,ReadRegister2,q[0][31:0],q[1][31:0],q[2][31:0],q[3][31:0],q[4][31:0],q[5][31:0],q[6][31:0],q[7][31:0],q[8][31:0],q[9][31:0],q[10][31:0],q[11][31:0],q[12][31:0],q[13][31:0],q[14][31:0],q[15][31:0],q[16][31:0],q[17][31:0],q[18][31:0],q[19][31:0],q[20][31:0],q[21][31:0],q[22][31:0],q[23][31:0],q[24][31:0],q[25][31:0],q[26][31:0],q[27][31:0],q[28][31:0],q[29][31:0],q[30][31:0],q[31][31:0]);
+
+  assign ReadData1= 300;
+  assign ReadData2=301;
 endmodule
