@@ -93,6 +93,8 @@ output reg		Clk
 
   // Initialize register driver signals
   initial begin
+  $display("%b", ReadData1);
+$display("%b", ReadData2);
     WriteData=32'd0;
     ReadRegister1=5'd0;
     ReadRegister2=5'd0;
@@ -140,6 +142,8 @@ output reg		Clk
   // All done!  Wait a moment and signal test completion.
   #5
   endtest = 1;
+$display("%b", ReadData1);
+$display("%b", ReadData2);
 
 end
 
