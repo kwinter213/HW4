@@ -93,8 +93,6 @@ output reg		Clk
 
   // Initialize register driver signals
   initial begin
-  $display("%b", ReadData1);
-$display("%b", ReadData2);
     WriteData=32'd0;
     ReadRegister1=5'd0;
     ReadRegister2=5'd0;
@@ -117,33 +115,441 @@ $display("%b", ReadData2);
   ReadRegister1 = 5'd2;
   ReadRegister2 = 5'd2;
   #5 Clk=1; #5 Clk=0;	// Generate single clock pulse
-
   // Verify expectations and report test result
-  if((ReadData1 != 42) || (ReadData2 != 42)) begin
+  if((ReadData1 !== 42) || (ReadData2 !== 42)) begin
     dutpassed = 0;	// Set to 'false' on failure
     $display("Test Case 1 Failed");
   end
 
-  // Test Case 2: 
-  //   Write '15' to register 2, verify with Read Ports 1 and 2
+// Test Case 2: 
+  //   Double check the zero register :) (#4 on the github)
+  WriteRegister = 5'd0;
+  WriteData = 32'd12;
+  RegWrite = 1;
+  ReadRegister1 = 5'd0;
+  ReadRegister2 = 5'd0;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1 !== 0) || (ReadData2 !== 0)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 2 Failed");
+  end
+
+// Test Case 3: 
+  //   Write Enable is broken/ignored (#2 on the github)
+  WriteRegister = 5'd30;
+  WriteData = 32'd30;
+  RegWrite = 0;
+  ReadRegister1 = 5'd30;
+  ReadRegister2 = 5'd30;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1==32'd30) || (ReadData2==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 3 Failed");
+  end
+
+// Test Case 4: 
+  //     Port 2 is not broken (#5 on the github)
+  WriteRegister = 5'd12;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd12;
+  ReadRegister2 = 5'd15;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 4 Failed");
+  end
+
+
+  WriteRegister = 5'd1;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd1;
+  ReadRegister2 = 5'd1;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
   WriteRegister = 5'd2;
-  WriteData = 32'd15;
+  WriteData = 32'd30;
   RegWrite = 1;
   ReadRegister1 = 5'd2;
   ReadRegister2 = 5'd2;
-  #5 Clk=1; #5 Clk=0;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
 
-  if((ReadData1 != 15) || (ReadData2 != 15)) begin
-    dutpassed = 0;
-    $display("Test Case 2 Failed");
+
+  WriteRegister = 5'd3;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd3;
+  ReadRegister2 = 5'd3;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+
+  WriteRegister = 5'd4;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd4;
+  ReadRegister2 = 5'd4;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+
+  WriteRegister = 5'd5;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd5;
+  ReadRegister2 = 5'd5;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+
+  WriteRegister = 5'd6;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd6;
+  ReadRegister2 = 5'd6;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+
+  WriteRegister = 5'd7;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd7;
+  ReadRegister2 = 5'd7;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+
+  WriteRegister = 5'd8;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd8;
+  ReadRegister2 = 5'd8;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+
+  WriteRegister = 5'd9;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd9;
+  ReadRegister2 = 5'd9;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+  WriteRegister = 5'd10;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd10;
+  ReadRegister2 = 5'd10;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+    WriteRegister = 5'd11;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd11;
+  ReadRegister2 = 5'd11;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+    WriteRegister = 5'd12;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd12;
+  ReadRegister2 = 5'd12;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+  WriteRegister = 5'd13;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd13;
+  ReadRegister2 = 5'd13;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+    WriteRegister = 5'd14;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd14;
+  ReadRegister2 = 5'd14;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+    WriteRegister = 5'd15;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd15;
+  ReadRegister2 = 5'd15;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+    WriteRegister = 5'd16;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd16;
+  ReadRegister2 = 5'd16;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+  WriteRegister = 5'd17;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd17;
+  ReadRegister2 = 5'd17;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+    WriteRegister = 5'd18;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd18;
+  ReadRegister2 = 5'd18;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+    WriteRegister = 5'd19;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd19;
+  ReadRegister2 = 5'd19;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+  WriteRegister = 5'd20;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd20;
+  ReadRegister2 = 5'd20;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+  WriteRegister = 5'd21;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd21;
+  ReadRegister2 = 5'd21;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+    WriteRegister = 5'd22;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd22;
+  ReadRegister2 = 5'd22;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+  WriteRegister = 5'd23;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd23;
+  ReadRegister2 = 5'd23;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+    WriteRegister = 5'd24;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd24;
+  ReadRegister2 = 5'd24;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+    WriteRegister = 5'd25;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd25;
+  ReadRegister2 = 5'd25;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+
+    WriteRegister = 5'd26;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd26;
+  ReadRegister2 = 5'd26;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+
+    WriteRegister = 5'd27;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd27;
+  ReadRegister2 = 5'd27;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+    WriteRegister = 5'd28;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd28;
+  ReadRegister2 = 5'd28;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+
+  WriteRegister = 5'd29;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd29;
+  ReadRegister2 = 5'd29;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+    WriteRegister = 5'd30;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd30;
+  ReadRegister2 = 5'd30;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
+  end
+
+  WriteRegister = 5'd31;
+  WriteData = 32'd30;
+  RegWrite = 1;
+  ReadRegister1 = 5'd31;
+  ReadRegister2 = 5'd31;
+  #5 Clk=1; #5 Clk=0; // Generate single clock pulse
+  // Verify expectations and report test result
+  if((ReadData1!==32'd30) || (ReadData2!==32'd30)) begin
+    dutpassed = 0;  // Set to 'false' on failure
+    $display("Test Case 5 Failed");
   end
 
 
   // All done!  Wait a moment and signal test completion.
   #5
   endtest = 1;
-$display("%b", ReadData1);
-$display("%b", ReadData2);
 
 end
 

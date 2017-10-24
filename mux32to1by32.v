@@ -12,8 +12,8 @@ input[31:0]   input0, input1, input2, input3, input4, input5, input6, input7, in
 	assign mux[ 3 ] = input3 ;
 	assign mux[ 4 ] = input4 ;
 	assign mux[ 5 ] = input5 ;
-assign mux[ 6 ] = input6 ;
-assign mux[ 7 ] = input7 ;
+	assign mux[ 6 ] = input6 ;
+	assign mux[ 7 ] = input7 ;
 assign mux[ 8 ] = input8 ;
 assign mux[ 9 ] = input9 ;
 assign mux[ 10 ] = input10 ;

@@ -97,9 +97,9 @@ register32 reg30 (regout30 [31:0], WriteData[31:0],dout[ 30 ],Clk);
 register32 reg31 (regout31 [31:0], WriteData[31:0],dout[ 31 ],Clk);
 
 //MUX0
-mux32to1by32 mux0(ReadData1[31:0],ReadRegister1[4:0],zout[31:0],reg1[31:0],reg2[31:0],reg3[31:0],reg4[31:0],reg5[31:0],reg6[31:0],reg7[31:0],reg8[31:0],reg9[31:0],reg10[31:0],reg11[31:0],reg12[31:0],reg13[31:0],reg14[31:0],reg15[31:0],reg16[31:0],reg17[31:0],reg18[31:0],reg19[31:0],reg20[31:0],reg21[31:0],reg22[31:0],reg23[31:0],reg24[31:0],reg25[31:0],reg26[31:0],reg27[31:0],reg28[31:0],reg29[31:0],reg30[31:0],reg31[31:0]);
+mux32to1by32 mux0(ReadData1[31:0],ReadRegister1[4:0],zout[31:0],regout1[31:0],regout2[31:0],regout3[31:0],regout4[31:0],regout5[31:0],regout6[31:0],regout7[31:0],regout8[31:0],regout9[31:0],regout10[31:0],regout11[31:0],regout12[31:0],regout13[31:0],regout14[31:0],regout15[31:0],regout16[31:0],regout17[31:0],regout18[31:0],regout19[31:0],regout20[31:0],regout21[31:0],regout22[31:0],regout23[31:0],regout24[31:0],regout25[31:0],regout26[31:0],regout27[31:0],regout28[31:0],regout29[31:0],regout30[31:0],regout31[31:0]);
 
 //MUX1
-mux32to1by32 mux1(ReadData2[31:0],ReadRegister2[4:0],zout[31:0],reg1[31:0],reg2[31:0],reg3[31:0],reg4[31:0],reg5[31:0],reg6[31:0],reg7[31:0],reg8[31:0],reg9[31:0],reg10[31:0],reg11[31:0],reg12[31:0],reg13[31:0],reg14[31:0],reg15[31:0],reg16[31:0],reg17[31:0],reg18[31:0],reg19[31:0],reg20[31:0],reg21[31:0],reg22[31:0],reg23[31:0],reg24[31:0],reg25[31:0],reg26[31:0],reg27[31:0],reg28[31:0],reg29[31:0],reg30[31:0],reg31[31:0]);
+mux32to1by32 mux1(ReadData2[31:0],ReadRegister2[4:0],zout[31:0],regout1[31:0],regout2[31:0],regout3[31:0],regout4[31:0],regout5[31:0],regout6[31:0],regout7[31:0],regout8[31:0],regout9[31:0],regout10[31:0],regout11[31:0],regout12[31:0],regout13[31:0],regout14[31:0],regout15[31:0],regout16[31:0],regout17[31:0],regout18[31:0],regout19[31:0],regout20[31:0],regout21[31:0],regout22[31:0],regout23[31:0],regout24[31:0],regout25[31:0],regout26[31:0],regout27[31:0],regout28[31:0],regout29[31:0],regout30[31:0],regout31[31:0]);
 
 endmodule
